@@ -1,0 +1,5 @@
+private static void copyToZip (FileSystem zipFs) throws IOException {
+    //Path sourceFile = Paths.get("file1.txt");
+    Path sourceFIle = FileSystems.getDefault().getPath("file1.txt")
+    Path destFile = zipFs.getPath("/file1Copied.txt");
+}
