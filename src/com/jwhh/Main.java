@@ -4,7 +4,9 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 import java.nio.file.*;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,7 +25,7 @@ public class Main {
         try(FileSystem zipFs = openZip(Paths.get("myData.zip"))){
             copyToZip(zipFs);
             writeToFileInZip1(zipFs, data);
-            //writeToFileInZip2(zipFs, data);
+            writeToFileInZip2(zipFs, data);
         } catch (Exception e) {
             System.out.println(e.getClass().getSimpleName() + " - " + e.getMessage());
         }
@@ -52,8 +54,8 @@ public class Main {
             }
         }
     }
-//    private static void writeToFileInZip2 (FileSystem zipFs, String[] data) throws IOException {
-//
-//    }
+    private static void writeToFileInZip2 (FileSystem zipFs, String[] data) throws IOException {
+        Files.write(zipFs.getPath("/newFile2.txt"), Arrays.asList(data), Charset.defaultCharset(), StandardOpenOption.CREATE);
+    }
 
 }
