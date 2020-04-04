@@ -1,5 +1,6 @@
 package com.jwhh;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -21,6 +22,8 @@ public class Main {
 
         try(FileSystem zipFs = openZip(Paths.get("myData.zip"))){
             copyToZip(zipFs);
+            writeToFileInZip1(zipFs, data);
+            //writeToFileInZip2(zipFs, data);
         } catch (Exception e) {
             System.out.println(e.getClass().getSimpleName() + " - " + e.getMessage());
         }
@@ -41,5 +44,16 @@ public class Main {
 
         Files.copy(sourceFile, destFile, StandardCopyOption.REPLACE_EXISTING);
     }
+    private static void writeToFileInZip1 (FileSystem zipFs, String[] data) throws IOException {
+        try(BufferedWriter writer = Files.newBufferedWriter(zipFs.getPath("/newFile1.txt"))){
+            for (String d:data){
+                writer.write(d);
+                writer.newLine();
+            }
+        }
+    }
+//    private static void writeToFileInZip2 (FileSystem zipFs, String[] data) throws IOException {
+//
+//    }
 
 }
